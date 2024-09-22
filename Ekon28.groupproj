@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B69EB5FD-238F-4F4C-AB09-9C1801CE7AD0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="RTTISampleApp\RTTISample.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RTTISample">
+        <MSBuild Projects="RTTISampleApp\RTTISample.dproj"/>
+    </Target>
+    <Target Name="RTTISample:Clean">
+        <MSBuild Projects="RTTISampleApp\RTTISample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RTTISample:Make">
+        <MSBuild Projects="RTTISampleApp\RTTISample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RTTISample"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RTTISample:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RTTISample:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
