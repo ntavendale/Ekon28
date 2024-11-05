@@ -6,6 +6,9 @@
         <Projects Include="RTTISampleApp\RTTISample.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="ConceptDemo\ConceptDemo.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -23,14 +26,23 @@
     <Target Name="RTTISample:Make">
         <MSBuild Projects="RTTISampleApp\RTTISample.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ConceptDemo">
+        <MSBuild Projects="ConceptDemo\ConceptDemo.dproj"/>
+    </Target>
+    <Target Name="ConceptDemo:Clean">
+        <MSBuild Projects="ConceptDemo\ConceptDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ConceptDemo:Make">
+        <MSBuild Projects="ConceptDemo\ConceptDemo.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="RTTISample"/>
+        <CallTarget Targets="RTTISample;ConceptDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="RTTISample:Clean"/>
+        <CallTarget Targets="RTTISample:Clean;ConceptDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="RTTISample:Make"/>
+        <CallTarget Targets="RTTISample:Make;ConceptDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
