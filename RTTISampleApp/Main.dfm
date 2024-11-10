@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'RTTI Examples'
-  ClientHeight = 575
+  ClientHeight = 570
   ClientWidth = 952
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,12 +19,10 @@ object fmMain: TfmMain
     Left = 0
     Top = 0
     Width = 952
-    Height = 575
-    ActivePage = tsData
+    Height = 570
+    ActivePage = tsResults
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 950
-    ExplicitHeight = 567
     object tsResults: TTabSheet
       Caption = 'Results'
       object ebResults: TEdit

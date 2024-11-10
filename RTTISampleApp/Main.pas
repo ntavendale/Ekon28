@@ -86,23 +86,25 @@ end;
 
 procedure TfmMain.ToggleEnabled(AControlArray: array of TComponent; AEnabled: Boolean);
 begin
-  var LContext := TRTTIContext.Create;
-  try
-    for var i := 0 to Length(AControlArray) - 1 do
-    begin
-      var LType := LContext.GetType(AControlArray[i].ClassType);
-      var LProp := LType.GetProperty('Enabled');
-      if (LProp <> nil) and (LProp.IsWritable) and (tkEnumeration = LProp.DataType.TypeKind) then
+  for var i := 0 to (Length(AControlArray) - 1) do
+  begin
+    var LComponent := AControlArray[i];
+    var LRttiContext := TRttiContext.Create;
+    try
+      var LRttiType := LRttiContext.GetType(LComponent.ClassType); // returns class reference or metaclass
+      var LProperty := LRttiType.GetProperty('Enabled');
+      // NOTE: boolean is an enum type
+      // type
+      //   Boolean = (FALSE, TRUE);
+      if (nil <> LProperty) and LProperty.IsWritable and (tkEnumeration = LProperty.DataType.TypeKind) then
       begin
         var LValue := TValue.From(AEnabled);
-        LProp.SetValue(AControlArray[i], LValue);
+        LProperty.SetValue(LComponent, LValue);
       end;
+    finally
+      LRttiContext.Free;
     end;
-  finally
-    LContext.Free;
   end;
-
-
 end;
 
 procedure TfmMain.SetDataSource(ADBControlsArray: array of TControl);
@@ -226,7 +228,7 @@ end;
 
 procedure TfmMain.btnCloneClick(Sender: TObject);
 begin
-  var NewButton := TObjectClone.From(btnClone);
+  TObjectClone.From(btnClone);
 end;
 
 end.
